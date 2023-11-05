@@ -1,11 +1,3 @@
-# Terraform Remote State Datasource
-# data "terraform_remote_state" "eks" {
-#   backend = "local"
-#   config = {
-#     path = "../../08-AWS-EKS-Cluster-Basics/01-ekscluster-terraform-manifests/terraform.tfstate"
-#    }
-# }
-
 ### The terraform_remote_state data source uses the latest state snapshot from a specified state backend to retrieve the root module output values from some other Terraform configuration.
 data "terraform_remote_state" "eks_terraform_cluster" {
   backend = "remote"

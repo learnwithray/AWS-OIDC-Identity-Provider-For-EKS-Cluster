@@ -4,12 +4,6 @@
 # reference : https://registry.terraform.io/providers/hashicorp/aws/4.1.0/docs/data-sources/partition
 
 
-# data "aws_partition" "current" {}
-
-# data "tls_certificate" "eks_cluster_issuer_url" {
-#   url = aws_eks_cluster.eks_terraform_cluster.identity[0].oidc[0].issuer
-# }
-
 # AWS IAM Open ID Connect Provider. A list of server certificate thumbprints for the OpenID Connect identity provider's server certificate
 resource "aws_iam_openid_connect_provider" "eks_terrform_cluster_oidc_provider" {
   client_id_list  = ["sts.${data.aws_partition.current.dns_suffix}"]
@@ -18,15 +12,7 @@ resource "aws_iam_openid_connect_provider" "eks_terrform_cluster_oidc_provider" 
   tags = {
     name = "${local.eks_cluster_name}-eks-oidc"
   }
-  # tags = merge(
-  #   {
-  #     Name = "${local.eks_cluster_name}-eks-irsa"
-  #   },
-  #   local.common_tags
-  # )
-  # depends_on = [
-  #   aws_eks_cluster.eks_terraform_cluster
-  # ]
+
 }
 
 ### remote_access -> ec2_ssh_key: Key Pair name that provides access for remote communication with the worker nodes in the EKS Node Group. 
